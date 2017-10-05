@@ -2,14 +2,14 @@
 
 [BigObject](http://www.bigobject.io) (BO) is a very light and efficient database with small footprint. 
 You can even run it on [PINE64](https://www.pine64.org/). 
-The demonstration shows a scenario that you can use BigObject + [Node-RED](https://nodered.org/) + [Mosquitto] (https://mosquitto.org/) to make a naive alerting system with a regular cell phone and a pine64. 
+The demonstration shows a scenario that you can use BigObject + [Node-RED](https://nodered.org/) + [Mosquitto](https://mosquitto.org/) to make a naive alerting system with a regular cell phone and a pine64. 
 
 ## Prerequisite
 1. A pine64 board. 
-	1. OS: [Xenial Minimal] (http://wiki.pine64.org/index.php/Pine_A64_Software_Release#Xenial_Minimal_Image)
+	1. OS: [Xenial Minimal](http://wiki.pine64.org/index.php/Pine_A64_Software_Release#Xenial_Minimal_Image)
 	1. Docker >= 1.10.0
 	1. Docker Compose >= 1.6.0 
-1. An android phone with the app, [Sample MQTT Publisher] (https://play.google.com/store/apps/details?id=com.hoop.accelerometer) 
+1. An android phone with the app, [Sample MQTT Publisher](https://play.google.com/store/apps/details?id=com.hoop.accelerometer) 
 
 ## How to setup this demo
 1. Get the source package from github
