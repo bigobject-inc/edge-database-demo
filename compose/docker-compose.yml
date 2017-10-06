@@ -1,7 +1,7 @@
 version: '2'
 services:
   node_red:
-    build: node-red
+    image: bigobject/node-red:arm64
     restart: unless-stopped
     volumes:
       - /srv/bigobject/node-red-data:/data
