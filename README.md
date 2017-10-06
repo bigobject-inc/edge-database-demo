@@ -34,5 +34,18 @@ The demonstration shows a scenario that you can use BigObject + [Node-RED](https
 1. Move your cellphone and you will see the changes in the dashboard
 1. Have fun!
 
+## How to remove this demo
+1. Use docker-compose to purge running containers
+	
+	``` pushd bo-edge-demo/compose; sudo docker-compose down -v; popd ```
+
+1. If you want to remove bo & node-red data, run
+
+	``` sudo rm -rf /srv/bigobject/iot-data /srv/bigobject/lua /srv/bigobject/node-red-data ```
+
+1. If you want to remove generated and downloaded docker images, run 
+
+	``` sudo docker rmi compose_mqtt_broker:latest compose_node_red:latest bigobject/bigobject-rpi-arm32:PINE64 node:8.6-slim buildpack-deps:jessie-curl ```
+
 
 
