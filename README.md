@@ -1,7 +1,7 @@
 # BigObject Edge Database Demonstration for Sliding Table and Hot Data Fast Access
 
 [BigObject](http://www.bigobject.io) (BO) is a very light and efficient database with small footprint. 
-You can even run it on [PINE64](https://www.pine64.org/). 
+You can even run it on [Raspberry Pi](https://www.raspberrypi.org/) or [PINE64](https://www.pine64.org/). 
 The demonstration shows a scenario that you can use BigObject + [Node-RED](https://nodered.org/) + [Mosquitto](https://mosquitto.org/) to make a naive alerting system with a regular cell phone and a pine64. 
 This demonstration utilizes two unique features: 
 
@@ -10,13 +10,24 @@ This demonstration utilizes two unique features:
 
 
 ## Prerequisite
-1. A pine64 board. 
+### PINE64 
+1. A pine64 board with 
 	1. OS: [Xenial Minimal](http://wiki.pine64.org/index.php/Pine_A64_Software_Release#Xenial_Minimal_Image)
 	1. git
 	1. curl
 	1. Docker >= 1.10.0
 	1. Docker Compose >= 1.6.0 
 		1. You can install these by executing ``` sudo apt install git curl docker.io docker-compose ```
+1. An android phone with the app, [Sample MQTT Publisher](https://play.google.com/store/apps/details?id=com.hoop.accelerometer) 
+### Raspberry Pi 3
+1. A Raspberry Pi board with
+	1. OS: [RASPBIAN STRETCH LITE](https://www.raspberrypi.org/downloads/raspbian/)
+	1. git
+	1. curl
+	1. Docker >= 1.10.0
+		1. Raspbian only provides docker 1.8, which doesn't support docker-compose 2.0. Please install docker-ce from docker.com's apt repository. [Ref](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
+	1. Docker Compose >= 1.6.0 
+		1. You can install these by executing ``` sudo apt install git curl docker-compose ```
 1. An android phone with the app, [Sample MQTT Publisher](https://play.google.com/store/apps/details?id=com.hoop.accelerometer) 
 
 ## How to setup this demo
@@ -68,9 +79,27 @@ Run this command
 ### What is Z-score?
 *In statistics, the Z-score is the signed number of standard deviations by which the value of an observation or data point is above the mean value of what is being observed or measured.* - [wikipedia](https://en.wikipedia.org/wiki/Standard_score)
 
-In this demonstration, the Z-score is defined as ![Z-socre](https://raw.githubusercontent.com/bigobject-inc/edge-database-demo/master/images/z-score.png). 
+In this demonstration, the Z-score is defined as ![Z-score](https://raw.githubusercontent.com/bigobject-inc/edge-database-demo/master/images/z-score.png). 
 
 The text showed Y-axis acceleration and Z-score will also turn red when the z-score is larger than 1. E.g. 
 ![screenshot2](https://raw.githubusercontent.com/bigobject-inc/edge-database-demo/master/images/screenshot2.png)
 
+### How to install docker-ce on Raspbian Stretch Lite
+The following steps are tested on a fresh installed Raspbian Stretch Lite. It's an excerpt from [Docker's official site](https://docs.docker.com/engine/installation/linux/docker-ce/debian/). It's highly recommended read the official site first before using these. 
+```
+sudo apt-get update
+sudo apt-get install -y \
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+echo "deb [arch=armhf] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+     $(lsb_release -cs) stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list
+sudo apt-get update
+sudo apt-get install -y docker-ce
+```
 
