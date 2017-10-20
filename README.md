@@ -1,8 +1,13 @@
-# BigObject Edge Database Demonstration
+# BigObject Edge Database Demonstration for Sliding Table and Hot Data Fast Access
 
 [BigObject](http://www.bigobject.io) (BO) is a very light and efficient database with small footprint. 
 You can even run it on [PINE64](https://www.pine64.org/). 
 The demonstration shows a scenario that you can use BigObject + [Node-RED](https://nodered.org/) + [Mosquitto](https://mosquitto.org/) to make a naive alerting system with a regular cell phone and a pine64. 
+This demonstration utilizes two unique features: 
+
+1. **Sliding Table**: A sliding table is a table that keeps only the records inserted in the most recent time period T. Any records stay in the table longer than T is considered expired and removed immediately from the table. A sliding table is a long-lasting and maintenance-free table that operates very efficiently and effectively in terms of memory and disk space. People do not have to worry about deleting old data. Data kept in a sliding table is recent and so-called hot data.
+2. **Hot Data Fast Access**:  Users can access hot data by specifying a recent period for efficiency. BigObject is optimized for performing it efficiently with using timestamp.
+
 
 ## Prerequisite
 1. A pine64 board. 
@@ -27,7 +32,7 @@ The demonstration shows a scenario that you can use BigObject + [Node-RED](https
 
 1. Import the flow, edge-demo-flow.json, via the following command or use the Node-RED's GUI
 	``` 
-	curl -X POST -v -d "@edge-database-demo/edge-demo-flow.json" --header "Content-type: application/json" http://localhost:1880/flows 
+	curl -v -d "@edge-database-demo/edge-demo-flow.json" --header "Content-type: application/json" http://localhost:1880/flows 
 	```
 
 1. Open the app in the cellphone and set the hostname as *pine64_ip* and port as 1883
@@ -57,11 +62,15 @@ Run this command
 
 1. If you want to remove generated and downloaded docker images, run 
 	``` 
-	sudo docker rmi compose_mqtt_broker:latest compose_node_red:latest bigobject/bigobject-rpi-arm32:PINE64 node:8.6-slim buildpack-deps:jessie-curl 
+	sudo docker rmi compose_mqtt_broker:latest bigobject/node-red:arm64 bigobject/bigobject-edge:arm64 buildpack-deps:jessie-curl
 	```
 ## FAQ
 ### What is Z-score?
 *In statistics, the Z-score is the signed number of standard deviations by which the value of an observation or data point is above the mean value of what is being observed or measured.* - [wikipedia](https://en.wikipedia.org/wiki/Standard_score)
-In this demonstration, the Z-score is defined as ![Z-socre](https://raw.githubusercontent.com/bigobject-inc/edge-database-demo/master/images/z-score.png). The text will also turn red when the z-score is larger than 1. 
+
+In this demonstration, the Z-score is defined as ![Z-socre](https://raw.githubusercontent.com/bigobject-inc/edge-database-demo/master/images/z-score.png). 
+
+The text showed Y-axis acceleration and Z-score will also turn red when the z-score is larger than 1. E.g. 
 ![screenshot2](https://raw.githubusercontent.com/bigobject-inc/edge-database-demo/master/images/screenshot2.png)
+
 
