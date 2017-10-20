@@ -11,7 +11,7 @@ The demonstration shows a scenario that you can use BigObject + [Node-RED](https
 	1. curl
 	1. Docker >= 1.10.0
 	1. Docker Compose >= 1.6.0 
-		1. You can install these by executing ``` sudo apt install docker.io docker-compose ```
+		1. You can install these by executing ``` sudo apt install git curl docker.io docker-compose ```
 1. An android phone with the app, [Sample MQTT Publisher](https://play.google.com/store/apps/details?id=com.hoop.accelerometer) 
 
 ## How to setup this demo
