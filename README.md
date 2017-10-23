@@ -39,11 +39,11 @@ This demonstration utilizes two unique features:
 1. Run this command on the pine64. It may take a while because of downloading docker images.  
 	1. PINE64
 	``` 
-	sudo mkdir -p -m777 /srv/bigobject/node-red-data; sudo docker-compose up -d -f edge-database-demo/compose/docker-compose.yml
+	sudo mkdir -p -m777 /srv/bigobject/node-red-data; sudo docker-compose -f edge-database-demo/compose/docker-compose.yml up -d 
 	```
 	2. Raspberry Pi
 	``` 
-	sudo mkdir -p -m777 /srv/bigobject/node-red-data; sudo docker-compose up -d -f edge-database-demo/compose/docker-compose-armhf.yml
+	sudo mkdir -p -m777 /srv/bigobject/node-red-data; sudo docker-compose -f edge-database-demo/compose/docker-compose-armhf.yml up -d
 	```
 
 1. Import the flow, edge-demo-flow.json, via the following command or use the Node-RED's GUI
@@ -62,22 +62,22 @@ This demonstration utilizes two unique features:
 Run this command 
 1. PINE64
 	``` 
-	sudo docker-compose stop -f edge-database-demo/compose/docker-compose.yml
+	sudo docker-compose -f edge-database-demo/compose/docker-compose.yml stop
 	```
 2. Raspberry Pi
 	``` 
-	sudo docker-compose stop -f edge-database-demo/compose/docker-compose-armhf.yml
+	sudo docker-compose -f edge-database-demo/compose/docker-compose-armhf.yml stop
 	```
 
 ## How to remove this demo
 1. Use docker-compose to purge running containers
 	1. PINE64
 	``` 
-	sudo docker-compose down -v -f edge-database-demo/compose/docker-compose.yml
+	sudo docker-compose -f edge-database-demo/compose/docker-compose.yml down -v
 	```
 	2. Raspberry Pi
 	``` 
-	sudo docker-compose down -v -f edge-database-demo/compose/docker-compose-armhf.yml
+	sudo docker-compose -f edge-database-demo/compose/docker-compose-armhf.yml down -v
 	```
 
 1. If you want to remove bo & node-red data, run
