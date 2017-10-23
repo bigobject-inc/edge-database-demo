@@ -19,13 +19,13 @@ This demonstration utilizes two unique features:
 	1. Docker Compose >= 1.6.0 
 		1. You can install these by executing ``` sudo apt install git curl docker.io docker-compose ```
 1. An android phone with the app, [Sample MQTT Publisher](https://play.google.com/store/apps/details?id=com.hoop.accelerometer) 
-### Raspberry Pi 3
+### Raspberry Pi 
 1. A Raspberry Pi board with
 	1. OS: [RASPBIAN STRETCH LITE](https://www.raspberrypi.org/downloads/raspbian/)
 	1. git
 	1. curl
 	1. Docker >= 1.10.0
-		1. Raspbian only provides docker 1.8, which doesn't support docker-compose 2.0. Please install docker-ce from docker.com's apt repository. [Ref](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
+		1. Raspbian only provides docker 1.8, which doesn't support docker-compose 2.0. Please install docker-ce from Docker's apt repository. [Reference](https://docs.docker.com/engine/installation/linux/docker-ce/debian/)
 	1. Docker Compose >= 1.6.0 
 		1. You can install these by executing ``` sudo apt install git curl docker-compose ```
 1. An android phone with the app, [Sample MQTT Publisher](https://play.google.com/store/apps/details?id=com.hoop.accelerometer) 
@@ -37,15 +37,19 @@ This demonstration utilizes two unique features:
 	```
 1. Get the ip address, *pin64_ip*, of the pine64 board. e.g. 192.168.1.123 
 1. Run this command on the pine64. It may take a while because of downloading docker images.  
+	1. PINE64
 	``` 
-	sudo mkdir -p -m777 /srv/bigobject/node-red-data; pushd edge-database-demo/compose; sudo docker-compose up -d; popd 
+	sudo mkdir -p -m777 /srv/bigobject/node-red-data; sudo docker-compose up -d -f edge-database-demo/compose/docker-compose.yml
+	```
+	2. Raspberry Pi
+	``` 
+	sudo mkdir -p -m777 /srv/bigobject/node-red-data; sudo docker-compose up -d -f edge-database-demo/compose/docker-compose-armhf.yml
 	```
 
 1. Import the flow, edge-demo-flow.json, via the following command or use the Node-RED's GUI
 	``` 
 	curl -v -d "@edge-database-demo/edge-demo-flow.json" --header "Content-type: application/json" http://localhost:1880/flows 
 	```
-
 1. Open the app in the cellphone and set the hostname as *pine64_ip* and port as 1883
 1. Press **Connect**, and keep the cellphone awake. 
 1. Open the dashboard, http://*pine64_ip*:1880/ui/, in your browser. 
@@ -56,14 +60,24 @@ This demonstration utilizes two unique features:
 
 ## How to stop this demo 
 Run this command 
+1. PINE64
 	``` 
-	pushd edge-database-demo/compose; sudo docker-compose stop; popd 
+	sudo docker-compose stop -f edge-database-demo/compose/docker-compose.yml
+	```
+2. Raspberry Pi
+	``` 
+	sudo docker-compose stop -f edge-database-demo/compose/docker-compose-armhf.yml
 	```
 
 ## How to remove this demo
 1. Use docker-compose to purge running containers
+	1. PINE64
 	``` 
-	pushd edge-database-demo/compose; sudo docker-compose down -v; popd 
+	sudo docker-compose down -v -f edge-database-demo/compose/docker-compose.yml
+	```
+	2. Raspberry Pi
+	``` 
+	sudo docker-compose down -v -f edge-database-demo/compose/docker-compose-armhf.yml
 	```
 
 1. If you want to remove bo & node-red data, run
@@ -72,8 +86,13 @@ Run this command
 	```
 
 1. If you want to remove generated and downloaded docker images, run 
+	1. PINE64
 	``` 
 	sudo docker rmi compose_mqtt_broker:latest bigobject/node-red:arm64 bigobject/bigobject-edge:arm64 buildpack-deps:jessie-curl
+	```
+	2. Raspberry Pi
+	``` 
+	sudo docker rmi compose_mqtt_broker:latest bigobject/node-red:armhf bigobject/bigobject-edge:armhf buildpack-deps:jessie-curl
 	```
 ## FAQ
 ### What is Z-score?

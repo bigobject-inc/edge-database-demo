@@ -1,0 +1,35 @@
+version: '2'
+services:
+  node_red:
+    image: bigobject/node-red:armhf
+    restart: unless-stopped
+    volumes:
+      - /srv/bigobject/node-red-data:/data
+    ports:
+      - "1880:1880"
+
+  mqtt_broker:
+    build: mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+
+  bigobject:
+    image: bigobject/bigobject-edge:armhf
+    restart: unless-stopped
+    #logging:
+    #  driver: syslog
+    #  options:
+    #    syslog-facility: local2
+    #    tag: "{{.Name}}"
+    ports:
+      - "3306:3306"
+    labels:
+      io.bigobject.bosrv: "major"
+    volumes:
+      - /srv/bigobject/iot-data:/data
+      - /srv/bigobject/lua:/bolua
+      - /etc/opt/bigobject/bo.conf:/config
+    environment:
+      TZ: Asia/Taipei
+
