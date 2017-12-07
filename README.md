@@ -8,6 +8,7 @@ This demonstration utilizes two unique features:
 1. **Sliding Table**: A sliding table is a table that keeps only the records inserted in the most recent time period T. Any records stay in the table longer than T is considered expired and removed immediately from the table. A sliding table is a long-lasting and maintenance-free table that operates very efficiently and effectively in terms of memory and disk space. People do not have to worry about deleting old data. Data kept in a sliding table is recent and so-called hot data.
 2. **Hot Data Fast Access**:  Users can access hot data by specifying a recent period for efficiency. BigObject is optimized for performing it efficiently with using timestamp.
 
+https://youtu.be/D0ZQSypXZcc
 
 ## Prerequisite
 ### PINE64 
